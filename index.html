@@ -57,7 +57,7 @@ body{margin:0;padding:16px;background:var(--color-bg);color:var(--color-fg);font
 .sx tbody tr.sel td{background:var(--color-panel);font-weight:var(--cds-font-weight-medium);box-shadow:inset 0 1px 0 var(--color-fg),inset 0 -1px 0 var(--color-fg)}
 .sx .bclk{cursor:pointer}
 :root{--color-fg:#ecebe6;--color-fg-muted:#a8a69f;--color-border-line:#46453f;--color-bg:#1d1d1b;--color-panel:#272724;--color-bad:#ff8a80;--cds-surface-popover:#2c2c29;--cds-border:#46453f;--cds-shadow-popover:0 4px 16px rgba(0,0,0,.5);--cds-chart-axis:#8b8a84;--cds-chart-grid:#46453f;--cds-chart-reference:#a8a69f;--cds-chart-muted:#77756f;--cds-chart-status-critical:#ff6b6b}
-body{background:#14161a}:root{--color-bg:#14161a;--color-panel:#1e2127;--cds-surface-popover:#262a31}.hd{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;margin-bottom:.25rem}.hd h1{margin:0}.hd img{height:64px;width:auto}</style></head><body>
+body{background:#14161a}:root{--color-bg:#14161a;--color-panel:#1e2127;--cds-surface-popover:#262a31}.hd{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;margin-bottom:.25rem}.hd h1{margin:0}.hd img{height:64px;width:auto}.xrow{margin:.25rem 0 .5rem}.dl{font:inherit;font-size:var(--cds-font-size-caption);padding:.3rem .7rem;cursor:pointer}</style></head><body>
 
 <div class="sx" id="sx-top">
  <div class="hd"><img src="logo.png" alt="The Mart Group" width="168" height="92"><h1>Inspection Reports</h1></div>
@@ -84,10 +84,12 @@ body{background:#14161a}:root{--color-bg:#14161a;--color-panel:#1e2127;--cds-sur
  </div>
  <div class="card" style="margin-bottom:var(--cds-gap-md)" id="sec-reports">
   <h2>Inspection reports</h2><p class="note">One row per Simplot report. Click a column to sort; click a row to summarize that report. Red = flagged value.</p>
+  <div class="xrow"><button class="dl" id="dl-reports">Download CSV (filtered reports, all fields)</button></div>
   <div class="scroll"><table id="tbl-reports" data-source="reports" data-row-key="doc"><thead></thead><tbody></tbody></table></div>
  </div>
  <div class="card" id="sec-roll">
   <h2>Weighted summary</h2><p class="note">Weighted by sample pounds, for the reports that match the filters above. Click a row to summarize that group.</p>
+  <div class="xrow"><button class="dl" id="dl-roll">Download CSV (this summary)</button></div>
   <div class="seg" id="seg"></div>
   <div class="scroll"><table id="tbl-roll"><thead></thead><tbody></tbody></table></div>
  </div>
@@ -245,12 +247,20 @@ function draw(){
  const rb=rt.tBodies[0];rb.replaceChildren();
  groups.forEach(r=>{const tr=document.createElement('tr');tr.dataset.key=r.key;tr.className='clk'+(sel&&sel.kind==='dim'&&sel.dim===segDim&&sel.val===r.key?' sel':'');
   [['grp',1],...SCN.map(c=>[c[0],0])].forEach(([k,tx])=>{const td=document.createElement('td');if(tx)td.className='tx';td.textContent=fv(k,r[k]);if(T[k]&&T[k](r[k]))td.classList.add('bad');tr.append(td);});rb.append(tr);});
+ EXP.rows=rows.slice().sort((a,b)=>{const x=sortVal(a,sortKey),y=sortVal(b,sortKey);return (x>y?1:x<y?-1:0)*sortDir;});EXP.groups=groups;EXP.seg=SEGS.find(s=>s[0]===segDim)[2];
 }
 $('#tbl-reports').addEventListener('click',e=>{const tr=e.target.closest('tbody tr[data-key]');if(!tr)return;const v=tr.dataset.key;sel=(sel&&sel.kind==='doc'&&sel.val===v)?null:{kind:'doc',val:v};draw();});
 $('#tbl-roll').addEventListener('click',e=>{const tr=e.target.closest('tbody tr[data-key]');if(!tr)return;const v=tr.dataset.key;sel=(sel&&sel.kind==='dim'&&sel.dim===segDim&&sel.val===v)?null:{kind:'dim',dim:segDim,val:v};draw();});
 dash.onData(draw);
 </script>
 <script>
+
+const EXP={rows:[],groups:[],seg:''};
+function csvCell(v){if(v===null||v===undefined)return '';if(Array.isArray(v))v=v.join('; ');v=String(v);return /[",\n\r]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v}
+function dlCsv(name,head,lines){const t='\ufeff'+[head.map(csvCell).join(','),...lines.map(l=>l.map(csvCell).join(','))].join('\r\n');const b=new Blob([t],{type:'text/csv;charset=utf-8'}),a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
+function stamp(){return new Date().toISOString().slice(0,10)}
+document.getElementById('dl-reports').addEventListener('click',()=>{if(!EXP.rows.length)return;const keys=[];EXP.rows.forEach(r=>Object.keys(r).forEach(k=>{if(!keys.includes(k))keys.push(k)}));dlCsv('inspection-reports-'+stamp()+'.csv',keys,EXP.rows.map(r=>keys.map(k=>r[k])))});
+document.getElementById('dl-roll').addEventListener('click',()=>{if(!EXP.groups.length)return;const ks=SCN.map(c=>c[0]);dlCsv('weighted-summary-'+stamp()+'.csv',[EXP.seg,...SCN.map(c=>c[1])],EXP.groups.map(g=>[g.grp,...ks.map(k=>g[k])]))});
 function showAsOf(){const el=document.getElementById('asof');const st=dash.data().status;
  if(st==='error'){el.textContent='Could not load the data. Check your connection and reload.';return}
  const a=dash.asof();let t='';if(a){const d=new Date(a);t=isNaN(d)?a:d.toLocaleString([], {dateStyle:'medium',timeStyle:'short'})}
