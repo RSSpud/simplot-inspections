@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><meta name="theme-color" content="#2a6fdb">
+<title>Simplot inspection results</title>
+<link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icon-192.png"><link rel="apple-touch-icon" href="icon-192.png">
+<style>:root{--font-anthropic-sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;--font-anthropic-serif:Georgia,"Times New Roman",serif;--color-fg:#1f1f1d;--color-fg-muted:#666560;--color-border-line:#d6d4cc;--color-bg:#ffffff;--color-panel:#f5f4ef;--color-bad:#b3261e;--cds-font-size-title:1.6rem;--cds-font-size-heading:1.05rem;--cds-font-size-body:.95rem;--cds-font-size-caption:.8rem;--cds-font-weight-medium:600;--cds-radius:8px;--cds-gap-sm:.5rem;--cds-gap-md:.75rem;--cds-pad-xs:.25rem;--cds-pad-sm:.5rem;--cds-pad-lg:1rem;--cds-surface-popover:#ffffff;--cds-border:#d6d4cc;--cds-shadow-popover:0 4px 16px rgba(0,0,0,.14);--cds-chart-axis:#8b8a84;--cds-chart-grid:#d6d4cc;--cds-chart-reference:#8b8a84;--cds-chart-muted:#a9a7a0;--cds-chart-status-critical:#c62828}
+@media (prefers-color-scheme:dark){:root{--color-fg:#ecebe6;--color-fg-muted:#a8a69f;--color-border-line:#46453f;--color-bg:#1d1d1b;--color-panel:#272724;--color-bad:#ff8a80;--cds-surface-popover:#2c2c29;--cds-border:#46453f;--cds-shadow-popover:0 4px 16px rgba(0,0,0,.5);--cds-chart-axis:#8b8a84;--cds-chart-grid:#46453f;--cds-chart-reference:#a8a69f;--cds-chart-muted:#77756f;--cds-chart-status-critical:#ff6b6b}}
+body{margin:0;padding:16px;background:var(--color-bg);color:var(--color-fg);font-family:var(--font-anthropic-sans)}
+.sx .rl{font:inherit;font-size:var(--cds-font-size-caption);padding:.15rem .5rem;margin-left:.5rem}
+@media(max-width:600px){body{padding:12px}.sx .tiles{grid-template-columns:repeat(2,1fr)}}
+
+.sx{max-width:1240px;margin-inline:auto;font-family:var(--font-anthropic-sans);color:var(--color-fg)}
+.sx h1{font-family:var(--font-anthropic-serif);font-weight:400;font-size:var(--cds-font-size-title);margin:0 0 .25rem}
+.sx h2{font-size:var(--cds-font-size-heading);font-weight:var(--cds-font-weight-medium);margin:0 0 .15rem}
+.sx .note{color:var(--color-fg-muted);font-size:var(--cds-font-size-caption);margin:0 0 .6rem}
+.sx .bar{display:flex;flex-wrap:wrap;gap:var(--cds-gap-sm);align-items:end;margin:1rem 0}
+.sx label{display:flex;flex-direction:column;font-size:var(--cds-font-size-caption);color:var(--color-fg-muted);gap:2px}
+.sx select,.sx button{font:inherit;font-size:var(--cds-font-size-body);padding:.3rem .5rem;border:1px solid var(--color-border-line);border-radius:var(--cds-radius);background:var(--color-bg);color:var(--color-fg)}
+.sx button{cursor:pointer}.sx button[aria-pressed=true]{background:var(--color-panel);font-weight:var(--cds-font-weight-medium)}
+.sx .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(9.5rem,1fr));gap:var(--cds-gap-md);margin-bottom:var(--cds-gap-md)}
+.sx .card{background:var(--color-panel);border:1px solid var(--color-border-line);border-radius:var(--cds-radius);padding:var(--cds-pad-lg);min-width:0}
+.sx .tile .v{font-family:var(--font-anthropic-serif);font-size:var(--cds-font-size-title);font-variant-numeric:tabular-nums;line-height:1.2}
+.sx .tile .l{font-size:var(--cds-font-size-caption);color:var(--color-fg-muted)}
+.sx .tile .t{font-size:var(--cds-font-size-caption);color:var(--color-fg-muted)}
+.sx .tile.bad .v{color:var(--color-bad)}
+.sx .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,22rem),1fr));gap:var(--cds-gap-md);margin-bottom:var(--cds-gap-md)}
+.sx .flags{display:flex;flex-wrap:wrap;gap:.5rem 1.25rem;font-size:var(--cds-font-size-body)}
+.sx .flags span b{font-variant-numeric:tabular-nums;font-weight:var(--cds-font-weight-medium)}
+.sx .flags .on b{color:var(--color-bad)}
+.sx .scroll{overflow:auto;max-height:28rem}
+.sx table{border-collapse:collapse;width:100%;font-size:var(--cds-font-size-caption);font-variant-numeric:tabular-nums}
+.sx th,.sx td{padding:.35rem .5rem;text-align:right;white-space:nowrap;border-bottom:1px solid var(--color-border-line)}
+.sx th:first-child,.sx td:first-child,.sx th.tx,.sx td.tx{text-align:left}
+.sx th{position:sticky;top:0;background:var(--color-panel);cursor:pointer;font-weight:var(--cds-font-weight-medium)}
+.sx td.bad{color:var(--color-bad);font-weight:var(--cds-font-weight-medium)}
+.sx .ch{position:relative;min-height:12rem}
+.sx .lg{display:flex;flex-wrap:wrap;gap:.4rem 1rem;margin:0 0 .4rem;font-size:var(--cds-font-size-caption);color:var(--color-fg-muted)}.sx .lgi{display:inline-flex;align-items:center;gap:.35rem}.sx .sw{width:.8rem;height:.8rem;border-radius:2px;display:inline-block}
+.sx .tip{position:absolute;pointer-events:none;background:var(--cds-surface-popover);border:1px solid var(--cds-border);border-radius:var(--cds-radius);box-shadow:var(--cds-shadow-popover);padding:var(--cds-pad-xs) var(--cds-pad-sm);font-size:var(--cds-font-size-caption);display:none;white-space:nowrap}
+.sx svg text{fill:var(--color-fg-muted);font-size:11px}
+.sx .seg{display:flex;gap:.25rem;margin:.4rem 0}
+.sx [data-dash-source-state=empty]{color:transparent}
+.sx [data-dash-source-state=refreshing]{opacity:.5}
+
+.sx .ms{position:relative;display:flex;flex-direction:column;font-size:var(--cds-font-size-caption);color:var(--color-fg-muted);gap:2px}
+.sx .ms summary{list-style:none;cursor:pointer;font-size:var(--cds-font-size-body);color:var(--color-fg);padding:.3rem .5rem;border:1px solid var(--color-border-line);border-radius:var(--cds-radius);background:var(--color-bg);min-width:9rem;max-width:14rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sx .ms summary::-webkit-details-marker{display:none}
+.sx .ms summary::after{content:' \25BE';color:var(--color-fg-muted)}
+.sx .ms.on summary{font-weight:var(--cds-font-weight-medium);background:var(--color-panel)}
+.sx .ms .pn{position:absolute;z-index:20;top:100%;left:0;margin-top:2px;min-width:14rem;max-width:22rem;background:var(--cds-surface-popover);border:1px solid var(--cds-border);border-radius:var(--cds-radius);box-shadow:var(--cds-shadow-popover);padding:var(--cds-pad-xs)}
+.sx .ms .lst{max-height:15rem;overflow:auto}
+.sx .ms .pn label{flex-direction:row;align-items:center;gap:.4rem;padding:.2rem .3rem;font-size:var(--cds-font-size-body);color:var(--color-fg);cursor:pointer}
+.sx .ms .pn .clr{margin-bottom:.25rem;font-size:var(--cds-font-size-caption)}
+.sx .sumbar{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;margin:0 0 .5rem}
+.sx .sumbar .st{font-size:var(--cds-font-size-body)}
+.sx .sumbar .st b{font-weight:var(--cds-font-weight-medium)}
+.sx .sumbar.pick .st{color:var(--color-fg)}
+.sx tbody tr.clk{cursor:pointer}.sx tbody tr.clk:hover{background:var(--color-panel)}
+.sx tbody tr.sel td{background:var(--color-panel);font-weight:var(--cds-font-weight-medium);box-shadow:inset 0 1px 0 var(--color-fg),inset 0 -1px 0 var(--color-fg)}
+.sx .bclk{cursor:pointer}
+</style></head><body>
+
+<div class="sx" id="sx-top">
+ <h1>Simplot inspection results</h1>
+ <p class="note" id="asof"></p>
+ <p class="note">Every figure is a sample-pound-weighted result from Simplot inspection reports. Red marks a flag threshold. Click a bar or a table row to see its summary at the top.</p>
+ <div class="bar">
+  <div class="ms" id="ms-year"></div>
+  <div class="ms" id="ms-grower"></div>
+  <div class="ms" id="ms-variety"></div>
+  <div class="ms" id="ms-origin"></div>
+  <div class="ms" id="ms-contract"></div>
+  <button id="f-reset">Reset</button>
+ </div>
+ <div class="sumbar" id="sumbar"><span class="st" id="sumtxt"></span><button id="sumclr" hidden>Clear selection</button></div>
+ <div class="tiles" id="tiles" data-source="reports"></div>
+ <div class="card" style="margin-bottom:var(--cds-gap-md)">
+  <h2>Reports flagged, by rule</h2>
+  <p class="note" id="note-fl">Count of inspection reports in the summary that trip each rule. With several crop years, shown as one count per year, earliest first.</p>
+  <div class="flags" id="flagrow" data-source="reports"></div>
+ </div>
+ <div class="grid">
+  <div class="card"><h2>Specific gravity by origin</h2><p class="note" id="note-sg"></p><div class="ch" id="ch-sg" data-source="reports"></div></div>
+  <div class="card"><h2>Bruise free and US #1 by origin</h2><p class="note" id="note-bf"></p><div class="ch" id="ch-bf" data-source="reports"></div></div>
+ </div>
+ <div class="card" style="margin-bottom:var(--cds-gap-md)" id="sec-reports">
+  <h2>Inspection reports</h2><p class="note">One row per Simplot report. Click a column to sort; click a row to summarize that report. Red = flagged value.</p>
+  <div class="scroll"><table id="tbl-reports" data-source="reports" data-row-key="doc"><thead></thead><tbody></tbody></table></div>
+ </div>
+ <div class="card" id="sec-roll">
+  <h2>Weighted summary</h2><p class="note">Weighted by sample pounds, for the reports that match the filters above. Click a row to summarize that group.</p>
+  <div class="seg" id="seg"></div>
+  <div class="scroll"><table id="tbl-roll"><thead></thead><tbody></tbody></table></div>
+ </div>
+ <p class="note" style="margin-top:1rem">Weighting: each report's value × its sample weight ÷ total sample weight. Specific gravity is weighted the same way. Bruise free and US #1 are reported by Simplot on the after-peel sample, size and tare on the grading sample, so they have different bases. Crop year is read from each report. Origin is the field named in Simplot's Source line; grower is matched to it by crop year from the Active Field Years export, and shows 'Unmatched' when that year's field list has no match; a grower marked 'Origin map (confirmed)' comes from a map Rhett confirmed for storage locations. Contract number is read from each report. A blank value means the report has no data for it (for example, no fry color samples), and it is left out of averages. Averages across crop years mix seasons, so with several crop years selected the summary tiles show each year separately, earliest first, separated by a slash. Sugar ends is the Attribute Summary value; sunburn/green is the Attribute Summary sunburn %. In the filters, picking several values in one list shows reports matching any of them; different lists narrow each other.</p>
+ <div class="tip" id="tip"></div>
+</div>
+
+<script src="d3.min.js"></script>
+<script>
+const dash=(()=>{
+ let rows=[],status='loading',params=null,cbs=[],asof='';
+ const KEY='sx-params-v1';
+ const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(params))}catch(e){}};
+ const emit=()=>cbs.forEach(f=>f());
+ try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&typeof s==='object')params=s}catch(e){}
+ const api={
+  data:()=>({status,data:rows}),
+  onData:f=>{cbs.push(f)},
+  params:()=>params||{},
+  setParams(p){params=Object.assign({},params||{},p);save();emit()},
+  resetParams(){params=defaultParams();save();emit()},
+  colors:['#2a6fdb'],
+  asof:()=>asof,
+  async load(){
+   try{
+    const r=await fetch('data.json?'+Date.now(),{cache:'no-store'});if(!r.ok)throw new Error('HTTP '+r.status);
+    const j=await r.json();rows=j.rows||[];asof=j.updated||'';status='ok';
+    if(!params)params=defaultParams();
+   }catch(e){status='error'}
+   emit();
+  }
+ };
+ function defaultParams(){const ys=[...new Set(rows.map(r=>r.crop_year))].sort();return ys.length?{crop_years:[ys[ys.length-1]]}:{}}
+ return api;
+})();
+</script>
+<script>
+const fmtN=d3.format(','),T={sg:v=>v!=null&&v<1.075,gt6oz_pct:v=>v!=null&&v<30,tare_pct:v=>v!=null&&v>5,bruise_free_pct:v=>v!=null&&v<50,fry_c0_pct:v=>v!=null&&v<80,sugar_ends_pct:v=>v!=null&&v>4,sunburn_pct:v=>v!=null&&v>4};
+const $=s=>document.querySelector(s),tip=$('#tip');
+const RC=[['doc','Document',1],['contract_no','Contract no.',1],['crop_year','Crop year',1],['origin','Origin',1],['grower','Grower',1],['grower_source','Grower source',1],['variety','Variety',1],['inspection_date','Inspected',1],['delivered_lbs','Delivered lb'],['sample_wt','Sample lb'],['sg','SG'],['gt6oz_pct','>6 oz %'],['bruise_free_pct','Bruise free %'],['us1_pct','US #1 %'],['dirt_pct','Dirt %'],['tare_pct','Tare %'],['sunburn_pct','Sunburn %'],['sugar_ends_pct','Sugar ends %'],['fry_c0_pct','Fry color 0 %'],['flags','Flags',1]];
+const SCN=[['n_reports','Reports'],['sample_lbs','Sample lb'],['delivered_lbs','Delivered lb'],['sg','SG'],['gt6oz_pct','>6 oz %'],['bruise_free_pct','Bruise free %'],['us1_pct','US #1 %'],['dirt_pct','Dirt %'],['tare_pct','Tare %'],['sunburn_pct','Sunburn %'],['sugar_ends_pct','Sugar ends %'],['fry_c0_pct','Fry color 0 %']];
+const TILES=[['n_reports','Reports'],['sg','Specific gravity'],['gt6oz_pct','>6 oz %'],['bruise_free_pct','Bruise free %'],['us1_pct','US #1 %'],['tare_pct','Tare %'],['fry_c0_pct','Fry color 0 %']];
+const FL=[['sg','SG < 1.075'],['gt6','>6 oz < 30%'],['tare','Tare > 5%'],['bf','Bruise free < 50%'],['fc0','Fry color 0 < 80%'],['se','Sugar ends > 4%'],['sun','Sunburn/green > 4%']];
+const M=['sg','gt6oz_pct','bruise_free_pct','us1_pct','dirt_pct','tare_pct','sunburn_pct','sugar_ends_pct','fry_c0_pct'];
+const MS=[['crop_year','crop_years','Crop year','All crop years','#ms-year'],['grower','growers','Grower','All growers','#ms-grower'],['variety','varieties','Variety','All varieties','#ms-variety'],['origin','origins','Origin (field)','All origins','#ms-origin'],['contract_no','contracts','Contract no.','All contracts','#ms-contract']];
+const SEGS=[['origin','By origin','Origin'],['grower','By grower','Grower'],['variety','By variety','Variety'],['contract_no','By contract','Contract no.'],['crop_year','By crop year','Crop year'],['all','All reports','Group']];
+let sortKey='inspection_date',sortDir=-1,segDim='origin',sel=null;
+const fv=(k,v)=>v==null?'':(k==='sg'?v.toFixed(3):(typeof v==='number'?(k.endsWith('_lbs')||k==='sample_wt'?fmtN(v):(Number.isInteger(v)?String(v):v.toFixed(2).replace(/0$/,'').replace(/\.$/,''))):v));
+const sortVal=(r,k)=>k==='inspection_date'?new Date(r[k]).getTime():r[k];
+const P=()=>dash.params(),L=k=>Array.isArray(P()[k])?P()[k]:[];
+function agg(rows){
+ const o={n_reports:rows.length,sample_lbs:0,delivered_lbs:0},s={},w={};
+ M.forEach(m=>{s[m]=0;w[m]=0;});FL.forEach(([f])=>o['n_flag_'+f]=0);
+ for(const r of rows){o.sample_lbs+=r.sample_wt;o.delivered_lbs+=r.delivered_lbs;
+  M.forEach(m=>{if(r[m]!=null){s[m]+=r[m]*r.sample_wt;w[m]+=r.sample_wt;}});
+  const fk=(r.flag_keys||'').split(',');FL.forEach(([f])=>{if(fk.includes(f))o['n_flag_'+f]++;});}
+ M.forEach(m=>{const v=w[m]>0?s[m]/w[m]:null;o[m]=v===null?null:(m==='sg'?Math.round(v*1000)/1000:Math.round(v*10)/10);});
+ return o;
+}
+$('#f-reset').addEventListener('click',()=>{sel=null;dash.resetParams();});
+$('#sumclr').addEventListener('click',()=>{sel=null;draw();});
+document.addEventListener('click',e=>{document.querySelectorAll('.sx .ms details[open]').forEach(d=>{if(!d.contains(e.target))d.open=false;});});
+function head(tbl,cols,onclick){const tr=document.createElement('tr');cols.forEach(c=>{const th=document.createElement('th');if(!tbl.dataset.noField)th.dataset.field=c[0];th.textContent=c[1];if(c[2])th.className='tx';th.addEventListener('click',()=>onclick(c[0]));tr.append(th);});tbl.tHead.replaceChildren(tr);}
+head($('#tbl-reports'),RC,k=>{sortDir=sortKey===k?-sortDir:1;sortKey=k;draw();});
+function tooltip(el,text){el.addEventListener('mousemove',e=>{const b=$('#sx-top').getBoundingClientRect();tip.style.display='block';tip.textContent=text;tip.style.left=Math.min(e.clientX-b.left+12,b.width-200)+'px';tip.style.top=(e.clientY-b.top+12)+'px';});el.addEventListener('mouseleave',()=>tip.style.display='none');}
+function labelW(texts){const s=document.createElementNS('http://www.w3.org/2000/svg','svg');s.style.cssText='position:absolute;visibility:hidden';const t=document.createElementNS(s.namespaceURI,'text');s.append(t);document.body.append(s);let w=0;texts.forEach(x=>{t.textContent=x;w=Math.max(w,t.getComputedTextLength());});s.remove();return w+8;}
+function pickOrigin(v){sel=(sel&&sel.kind==='dim'&&sel.dim==='origin'&&sel.val===v)?null:{kind:'dim',dim:'origin',val:v};draw();}
+function hchart(box,rows,series,ref,dom,fmt){
+ box.replaceChildren();if(!rows.length)return;
+ const W=box.clientWidth||320,rowH=series.length>1?34:26,H=rows.length*rowH+28,names=rows.map(r=>r.origin);
+ const ml=Math.min(W*0.4,labelW(names)),sc=d3.scaleLinear(dom,[ml,W-16]);
+ const lg=d3.select(box).append('div').attr('class','lg');
+ const sw=(c,t)=>{const i=lg.append('span').attr('class','lgi');i.append('span').attr('class','sw').style('background',c);i.append('span').text(t);};
+ series.forEach((s,j)=>sw(j?'var(--cds-chart-muted)':dash.colors[0],s.n));
+ if(series.some(s=>s.flag))sw('var(--cds-chart-status-critical)',series.length>1?`${series[0].n} below flag threshold`:`${series[0].n} flagged`);
+ const svg=d3.select(box).append('svg').attr('width','100%').attr('viewBox',`0 0 ${W} ${H}`);
+ const y=d3.scaleBand(names.map((n,i)=>i),[0,rows.length*rowH]).padding(.25);
+ svg.append('g').attr('transform',`translate(0,${rows.length*rowH})`).call(d3.axisBottom(sc).ticks(4).tickFormat(fmt)).call(g=>{g.attr('font-size',null).attr('font-family',null);g.select('.domain').attr('stroke','var(--cds-chart-axis)');g.selectAll('line').attr('stroke','var(--cds-chart-grid)');});
+ svg.append('line').attr('x1',sc(ref)).attr('x2',sc(ref)).attr('y1',0).attr('y2',rows.length*rowH).attr('stroke','var(--cds-chart-reference)').attr('stroke-dasharray','4 3');
+ rows.forEach((r,i)=>{
+  const isSel=sel&&sel.kind==='dim'&&sel.dim==='origin'&&sel.val===r.origin;
+  if(isSel)svg.append('rect').attr('x',0).attr('y',y(i)-2).attr('width',W).attr('height',y.bandwidth()+4).attr('rx',3).style('fill','var(--color-panel)').style('stroke','var(--color-fg)').style('stroke-width',1);
+  const lab=svg.append('text').attr('class','bclk').attr('x',ml-6).attr('y',y(i)+y.bandwidth()/2+4).attr('text-anchor','end').style('font-weight',isSel?'600':null).text(r.origin);
+  lab.on('click',()=>pickOrigin(r.origin));
+  series.forEach((s,j)=>{const bh=y.bandwidth()/series.length,v=r[s.k]==null?dom[0]:r[s.k],flag=s.flag&&r[s.k]!=null&&s.flag(v);
+   const rect=svg.append('rect').attr('class','bclk').attr('x',ml).attr('y',y(i)+j*bh).attr('height',bh-2).attr('width',Math.max(0,sc(Math.max(v,dom[0]))-ml)).attr('rx',3).style('fill',flag?'var(--cds-chart-status-critical)':(j?'var(--cds-chart-muted)':dash.colors[0]));
+   rect.on('click',()=>pickOrigin(r.origin));
+   tooltip(rect.node(),`${r.origin} (${r.n_reports} report${r.n_reports===1?'':'s'}) — ${s.n}: ${r[s.k]==null?'no data':fmt(v)}. Click to summarize.`);});
+ });
+}
+function msBuild(all,flt,[field,pk,label,allText,id]){
+ const el=$(id),old=el.querySelector('details'),wasOpen=old&&old.open,oldScroll=old?(old.querySelector('.lst')||{}).scrollTop:0;
+ const cur=L(pk),avail=new Set(all.filter(r=>flt(r,field)).map(r=>r[field]));cur.forEach(v=>avail.add(v));
+ const vals=[...avail].filter(v=>v!=null).sort((a,b)=>String(a).localeCompare(String(b),undefined,{numeric:true}));
+ el.classList.toggle('on',cur.length>0);
+ const cap=document.createElement('span');cap.textContent=label;
+ const d=document.createElement('details'),sm=document.createElement('summary');
+ sm.textContent=cur.length===0?allText:(cur.length===1?cur[0]:cur.length+' selected');sm.title=cur.join(', ');
+ const pn=document.createElement('div');pn.className='pn';
+ const clr=document.createElement('button');clr.className='clr';clr.textContent='Clear';clr.addEventListener('click',()=>dash.setParams({[pk]:[]}));
+ const lst=document.createElement('div');lst.className='lst';
+ vals.forEach(v=>{const lb=document.createElement('label'),cb=document.createElement('input');cb.type='checkbox';cb.value=v;cb.checked=cur.includes(v);
+  cb.addEventListener('change',()=>dash.setParams({[pk]:[...lst.querySelectorAll('input:checked')].map(i=>i.value)}));
+  lb.append(cb,document.createTextNode(v));lst.append(lb);});
+ pn.append(clr,lst);d.append(sm,pn);if(wasOpen)d.open=true;
+ el.replaceChildren(cap,d);if(wasOpen&&oldScroll)lst.scrollTop=oldScroll;
+}
+function draw(){
+ const d=dash.data('reports'),ok=d.status==='ok',all=ok?d.data:[];
+ const flt=(r,skip)=>MS.every(([f,pk])=>{if(f===skip)return true;const c=L(pk);return !c.length||c.includes(r[f]);});
+ MS.forEach(m=>msBuild(all,flt,m));
+ const rows=all.filter(r=>flt(r,null));
+ // selection -> summary rows
+ let sr=rows,selLabel='';
+ if(sel){sr=sel.kind==='doc'?rows.filter(r=>r.doc===sel.val):rows.filter(r=>sel.dim==='all'||r[sel.dim]===sel.val);
+  if(!sr.length){sel=null;sr=rows;}else selLabel=sel.kind==='doc'?`report ${sel.val} (${sr[0].origin}, contract ${sr[0].contract_no})`:(sel.dim==='all'?'all reports in the filters':`${(SEGS.find(s=>s[0]===sel.dim)||[])[2]||sel.dim} ${sel.val}`);}
+ const bar=$('#sumbar');bar.classList.toggle('pick',!!sel);
+ const parts=[];MS.forEach(([f,pk,lab])=>{const c=L(pk);if(c.length)parts.push(lab.replace(' (field)','').toLowerCase()+': '+(c.length>3?c.length+' selected':c.join(', ')));});
+ const ctx=parts.length?parts.join(' · '):'all reports';
+ const st=$('#sumtxt');st.replaceChildren();
+ if(sel){const b=document.createElement('b');b.textContent='Selected: '+selLabel;st.append(b,document.createTextNode(' — summary of '+sr.length+' report'+(sr.length===1?'':'s')+(sel.kind==='doc'?'':' within the filters ('+ctx+')')));}
+ else st.textContent='Summary of '+rows.length+' report'+(rows.length===1?'':'s')+' ('+ctx+'). Click a bar or row to focus on one.';
+ $('#sumclr').hidden=!sel;
+ const allYears=[...new Set(all.map(r=>r.crop_year))].sort((a,b)=>String(a).localeCompare(String(b),undefined,{numeric:true}));
+ const selYears=L('crop_years').slice().sort((a,b)=>String(a).localeCompare(String(b),undefined,{numeric:true}));
+ let yrs=selYears.length?selYears:allYears;
+ if(sel)yrs=yrs.filter(y=>sr.some(r=>r.crop_year===y));
+ const multi=yrs.length>1,AY=yrs.map(y=>agg(sr.filter(r=>r.crop_year===y))),A=agg(sr);
+ if(multi&&!sel)st.append(document.createTextNode(' Figures show each crop year separately, earliest first: '+yrs.join(' / ')+'.'));
+ if(multi&&sel)st.append(document.createTextNode(' Figures show each crop year separately: '+yrs.join(' / ')+'.'));
+ const tiles=$('#tiles');tiles.replaceChildren();
+ TILES.forEach(([f,l])=>{const c=document.createElement('div');c.className='card tile';const val=document.createElement('div');val.className='v';
+  if(!multi){val.textContent=ok&&sr.length?(fv(f,A[f])||'—'):'—';if(T[f]&&T[f](A[f]))c.classList.add('bad');}
+  else{AY.forEach((a,i)=>{if(i)val.append(document.createTextNode(' / '));const sp=document.createElement('span'),n=sr.filter(r=>r.crop_year===yrs[i]).length;sp.textContent=ok&&n?(fv(f,a[f])||'—'):'—';if(T[f]&&T[f](a[f]))sp.style.color='var(--color-bad)';val.append(sp);});val.style.fontSize='var(--cds-font-size-heading)';}
+  const lab=document.createElement('div');lab.className='l';lab.textContent=l+(multi?' ('+yrs.join(' / ')+')':'');c.append(val,lab);tiles.append(c);});
+ const fr=$('#flagrow');fr.replaceChildren();
+ FL.forEach(([f,l])=>{const s=document.createElement('span'),b=document.createElement('b');if(!multi){b.textContent=ok&&sr.length?A['n_flag_'+f]:'—';if(ok&&A['n_flag_'+f]>0)s.className='on';}else{b.textContent=AY.map((a,i)=>ok&&sr.some(r=>r.crop_year===yrs[i])?a['n_flag_'+f]:'—').join(' / ');if(ok&&AY.some(a=>a['n_flag_'+f]>0))s.className='on';}s.append(l+': ',b);fr.append(s);});
+ // charts: one bar per origin among the filtered reports, lowest 12
+ const by=(dim,rs)=>{const g=d3.group(rs,r=>r[dim]);return [...g].map(([k,v])=>Object.assign(agg(v),{[dim]:k,key:k}));};
+ const org=by('origin',rows);
+ const sgRows=org.filter(r=>r.sg!=null).sort((a,b)=>a.sg-b.sg),bfRows=org.filter(r=>r.bruise_free_pct!=null).sort((a,b)=>a.bruise_free_pct-b.bruise_free_pct);
+ $('#note-sg').textContent=`Lowest ${Math.min(12,sgRows.length)} of ${sgRows.length} origins, weighted by sample lb. Dashed line = 1.075. Click a bar to summarize it.`;
+ $('#note-bf').textContent=`Lowest ${Math.min(12,bfRows.length)} of ${bfRows.length} origins by bruise free, weighted by sample lb. % of after-peel sample. Blue = bruise free %, grey = US #1 %, red = bruise free below 50%. Dashed line = 50%. Click a bar to summarize it.`;
+ hchart($('#ch-sg'),sgRows.slice(0,12),[{k:'sg',n:'SG',flag:T.sg}],1.075,[1.06,1.1],d3.format('.3f'));
+ hchart($('#ch-bf'),bfRows.slice(0,12),[{k:'bruise_free_pct',n:'Bruise free %',flag:T.bruise_free_pct},{k:'us1_pct',n:'US #1 %'}],50,[0,100],x=>x+'%');
+ // reports table
+ const tb=$('#tbl-reports').tBodies[0];tb.replaceChildren();
+ rows.slice().sort((a,b)=>{const x=sortVal(a,sortKey),y=sortVal(b,sortKey);return (x>y?1:x<y?-1:0)*sortDir;}).forEach(r=>{const tr=document.createElement('tr');tr.dataset.key=r.doc;tr.className='clk'+(sel&&sel.kind==='doc'&&sel.val===r.doc?' sel':'');
+  RC.forEach(([k,,tx])=>{const td=document.createElement('td');if(tx)td.className='tx';td.textContent=fv(k,r[k]);if(T[k]&&T[k](r[k]))td.classList.add('bad');tr.append(td);});tb.append(tr);});
+ // weighted summary
+ const seg=$('#seg');seg.replaceChildren();
+ SEGS.forEach(([k,l])=>{const b=document.createElement('button');b.textContent=l;b.setAttribute('aria-pressed',segDim===k);b.addEventListener('click',()=>{segDim=k;draw();});seg.append(b);});
+ const rt=$('#tbl-roll');rt.dataset.noField='1';head(rt,[['grp',SEGS.find(s=>s[0]===segDim)[2],1],...SCN],()=>{});
+ const groups=segDim==='all'?[Object.assign(agg(rows),{grp:'All reports in the filters',key:'all'})]:by(segDim,rows).map(g=>Object.assign(g,{grp:g.key})).sort((a,b)=>String(a.grp).localeCompare(String(b.grp),undefined,{numeric:true}));
+ const rb=rt.tBodies[0];rb.replaceChildren();
+ groups.forEach(r=>{const tr=document.createElement('tr');tr.dataset.key=r.key;tr.className='clk'+(sel&&sel.kind==='dim'&&sel.dim===segDim&&sel.val===r.key?' sel':'');
+  [['grp',1],...SCN.map(c=>[c[0],0])].forEach(([k,tx])=>{const td=document.createElement('td');if(tx)td.className='tx';td.textContent=fv(k,r[k]);if(T[k]&&T[k](r[k]))td.classList.add('bad');tr.append(td);});rb.append(tr);});
+}
+$('#tbl-reports').addEventListener('click',e=>{const tr=e.target.closest('tbody tr[data-key]');if(!tr)return;const v=tr.dataset.key;sel=(sel&&sel.kind==='doc'&&sel.val===v)?null:{kind:'doc',val:v};draw();});
+$('#tbl-roll').addEventListener('click',e=>{const tr=e.target.closest('tbody tr[data-key]');if(!tr)return;const v=tr.dataset.key;sel=(sel&&sel.kind==='dim'&&sel.dim===segDim&&sel.val===v)?null:{kind:'dim',dim:segDim,val:v};draw();});
+dash.onData(draw);
+</script>
+<script>
+function showAsOf(){const el=document.getElementById('asof');const st=dash.data().status;
+ if(st==='error'){el.textContent='Could not load the data. Check your connection and reload.';return}
+ const a=dash.asof();let t='';if(a){const d=new Date(a);t=isNaN(d)?a:d.toLocaleString([], {dateStyle:'medium',timeStyle:'short'})}
+ el.replaceChildren(document.createTextNode(t?'Data updated '+t+'.':''));
+ const b=document.createElement('button');b.className='rl';b.textContent='Reload data';b.addEventListener('click',()=>dash.load());el.append(b);}
+dash.onData(showAsOf);dash.load();
+if('serviceWorker' in navigator&&location.protocol.startsWith('http')){try{navigator.serviceWorker.register('sw.js')}catch(e){}}
+</script>
+</body></html>
