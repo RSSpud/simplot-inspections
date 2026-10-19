@@ -1,5 +1,5 @@
 {
- "name": "Simplot inspection results",
+ "name": "Inspection Reports",
  "short_name": "Inspections",
  "description": "Weighted Simplot inspection results by crop year, grower, variety, origin and contract.",
  "start_url": "./",
