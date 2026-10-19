@@ -57,10 +57,10 @@ body{margin:0;padding:16px;background:var(--color-bg);color:var(--color-fg);font
 .sx tbody tr.sel td{background:var(--color-panel);font-weight:var(--cds-font-weight-medium);box-shadow:inset 0 1px 0 var(--color-fg),inset 0 -1px 0 var(--color-fg)}
 .sx .bclk{cursor:pointer}
 :root{--color-fg:#ecebe6;--color-fg-muted:#a8a69f;--color-border-line:#46453f;--color-bg:#1d1d1b;--color-panel:#272724;--color-bad:#ff8a80;--cds-surface-popover:#2c2c29;--cds-border:#46453f;--cds-shadow-popover:0 4px 16px rgba(0,0,0,.5);--cds-chart-axis:#8b8a84;--cds-chart-grid:#46453f;--cds-chart-reference:#a8a69f;--cds-chart-muted:#77756f;--cds-chart-status-critical:#ff6b6b}
-body{background:#14161a}:root{--color-bg:#14161a;--color-panel:#1e2127;--cds-surface-popover:#262a31}</style></head><body>
+body{background:#14161a}:root{--color-bg:#14161a;--color-panel:#1e2127;--cds-surface-popover:#262a31}.hd{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;margin-bottom:.25rem}.hd h1{margin:0}.hd img{height:64px;width:auto}</style></head><body>
 
 <div class="sx" id="sx-top">
- <h1>Simplot inspection results</h1>
+ <div class="hd"><img src="logo.png" alt="Simplot" width="168" height="92"><h1>Simplot inspection results</h1></div>
  <p class="note" id="asof"></p>
  <p class="note">Every figure is a sample-pound-weighted result from Simplot inspection reports. Red marks a flag threshold. Click a bar or a table row to see its summary at the top.</p>
  <div class="bar">
